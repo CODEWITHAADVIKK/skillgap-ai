@@ -1,0 +1,365 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id            String   @id @default(cuid())
+  clerkId       String   @unique
+  email         String   @unique
+  firstName     String?
+  lastName      String?
+  imageUrl      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  profile       Profile?
+  resumes       Resume[]
+  githubProfile GitHubProfile?
+  skillGaps     SkillGap[]
+  roadmaps      Roadmap[]
+  projects      Project[]
+  reports       Report[]
+  interviewSessions InterviewSession[]
+  applications  Application[]
+  notifications Notification[]
+  learningProgress LearningProgress[]
+  certificates  Certificate[]
+  aiChats       AIChat[]
+  settings      Settings?
+  auditLogs     AuditLog[]
+}
+
+model Profile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dreamRole       String?
+  country         String?
+  city            String?
+  remote          Boolean  @default(false)
+  expectedSalary  Int?
+  experienceLevel String?
+  onboardingStep  Int      @default(0)
+  onboardingComplete Boolean @default(false)
+  careerReadinessScore Float?
+  skillGapScore   Float?
+  resumeHealth    Float?
+  atsScore        Float?
+  githubHealth    Float?
+  weeklyGoalHours Int      @default(5)
+  weeklyProgressHours Float @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Resume {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fileName      String
+  fileUrl       String
+  fileType      String
+  rawText       String?  @db.Text
+  parsedData    Json?
+  embedding     Float[]
+  education     Json?
+  experience    Json?
+  skills        Json?
+  projects      Json?
+  certifications Json?
+  languages     Json?
+  frameworks    Json?
+  tools         Json?
+  achievements  Json?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  skills_rel    ResumeSkill[]
+}
+
+model ResumeSkill {
+  id        String   @id @default(cuid())
+  resumeId  String
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  skillId   String
+  skill     Skill    @relation(fields: [skillId], references: [id])
+  confidence Float   @default(1.0)
+  source    String   @default("resume")
+  createdAt DateTime @default(now())
+
+  @@unique([resumeId, skillId])
+}
+
+model GitHubProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  githubUsername  String
+  accessToken     String?
+  avatarUrl       String?
+  bio             String?
+  publicRepos     Int      @default(0)
+  followers       Int      @default(0)
+  contributionData Json?
+  languages       Json?
+  frameworks      Json?
+  analyzedAt      DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  repositories    Repository[]
+}
+
+model Repository {
+  id              String   @id @default(cuid())
+  githubProfileId String
+  githubProfile   GitHubProfile @relation(fields: [githubProfileId], references: [id], onDelete: Cascade)
+  name            String
+  fullName        String
+  description     String?  @db.Text
+  language        String?
+  stars           Int      @default(0)
+  forks           Int      @default(0)
+  topics          String[]
+  readmeQuality   Float?
+  complexity      Float?
+  documentation   Float?
+  commitActivity  Json?
+  url             String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Skill {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String?
+  embedding   Float[]
+  demandScore Float?
+  avgSalary   Float?
+  trending    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  resumeSkills ResumeSkill[]
+  skillGaps   SkillGap[]
+}
+
+model SkillGap {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skillId           String
+  skill             Skill    @relation(fields: [skillId], references: [id])
+  priority          String   @default("medium")
+  marketImportance  Float?
+  confidenceScore   Float?
+  whyItMatters      String?  @db.Text
+  companies         String[]
+  learningResources Json?
+  suggestedProjects Json?
+  difficulty        String?
+  estimatedHours    Int?
+  learningPath      Json?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([userId, skillId])
+}
+
+model Roadmap {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  fromRole    String?
+  toRole      String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  milestones  RoadmapMilestone[]
+}
+
+model RoadmapMilestone {
+  id              String   @id @default(cuid())
+  roadmapId       String
+  roadmap         Roadmap  @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  title           String
+  description     String?  @db.Text
+  status          String   @default("upcoming")
+  type            String   @default("milestone")
+  orderIndex      Int      @default(0)
+  targetDate      DateTime?
+  completedAt     DateTime?
+  learningTopics  Json?
+  projects        Json?
+  certifications  Json?
+  practiceProblems Json?
+  videos          Json?
+  articles        Json?
+  githubRepo      String?
+  progress        Float    @default(0)
+  estimatedHours  Int?
+  metadata        Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Project {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  description     String   @db.Text
+  skillsCovered   String[]
+  difficulty      String   @default("intermediate")
+  duration        String?
+  resumeImpact    Float?
+  portfolioValue  Float?
+  githubExamples  Json?
+  starterRepo     String?
+  resources       Json?
+  progress        Float    @default(0)
+  status          String   @default("suggested")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  type        String   @default("full")
+  data        Json
+  pdfUrl      String?
+  createdAt   DateTime @default(now())
+}
+
+model InterviewSession {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        String   @default("technical")
+  company     String?
+  role        String?
+  questions   Json
+  answers     Json?
+  score       Float?
+  feedback    Json?
+  weakTopics  String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Application {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  company         String
+  role            String
+  status          String   @default("applied")
+  applicationDate DateTime @default(now())
+  notes           String?  @db.Text
+  interviewSchedule Json?
+  offerDetails    Json?
+  salary          String?
+  location        String?
+  orderIndex      Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String   @db.Text
+  type      String   @default("info")
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+}
+
+model LearningProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resourceId  String
+  resourceType String
+  title       String
+  progress    Float    @default(0)
+  completed   Boolean  @default(false)
+  metadata    Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  issuer      String?
+  issuedAt    DateTime?
+  url         String?
+  createdAt   DateTime @default(now())
+}
+
+model AIChat {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      String
+  content   String   @db.Text
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+model Settings {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  emailNotifications Boolean @default(true)
+  weeklyDigest    Boolean  @default(true)
+  theme           String   @default("light")
+  language        String   @default("en")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  resource  String?
+  metadata  Json?
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
+
+model JobPosting {
+  id              String   @id @default(cuid())
+  externalId      String?
+  source          String
+  title           String
+  company         String
+  location        String?
+  remote          Boolean  @default(false)
+  salaryMin       Int?
+  salaryMax       Int?
+  requiredSkills  String[]
+  preferredSkills String[]
+  experience      String?
+  description     String?  @db.Text
+  url             String?
+  postedAt        DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([source, externalId])
+}
