@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getApplicationsData } from "@/lib/data/dashboard";
 import ApplicationsClient from "./applications-client";
 

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { redirect } from "next/navigation";
 import { getOrCreateUser } from "@/lib/auth";
 import { ProfileClient } from "./profile-client";

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Link from "next/link";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { getGapAnalysisData } from "@/lib/data/dashboard";

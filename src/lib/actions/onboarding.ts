@@ -54,7 +54,7 @@ export async function uploadResume(formData: FormData) {
   let rawText = "";
   try {
     rawText = await extractTextFromFile(buffer, file.type);
-  } catch (e) {
+  } catch (_e) {
     rawText = file.name;
   }
   const fileUrl = `/uploads/${user.id}/${file.name}`;
@@ -78,7 +78,7 @@ export async function uploadResume(formData: FormData) {
       where: { userId: user.id },
       data: { onboardingStep: 4 },
     });
-  } catch (error) {
+  } catch (_error) {
     // Ignore
   }
 
@@ -101,7 +101,7 @@ export async function connectGitHub(username: string) {
       where: { userId: user.id },
       data: { onboardingStep: 5 },
     });
-  } catch (error) {
+  } catch (_error) {
     // Ignore
   }
 
@@ -113,7 +113,7 @@ export async function generateAIProfile() {
   const user = await getOrCreateUser();
   if (!user) throw new Error("Unauthorized");
 
-  let result: any = { success: true };
+  let result: unknown = { success: true };
   try {
     result = await runFullAnalysis(user.id);
   } catch (err) {
@@ -235,7 +235,7 @@ export async function generateReport(type: string) {
   const user = await getOrCreateUser();
   if (!user) throw new Error("Unauthorized");
 
-  let reportData = {
+  const reportData = {
     generatedAt: new Date().toISOString(),
     profile: user.profile,
     skillGaps: user.skillGaps,
@@ -361,7 +361,7 @@ export async function submitInterviewAnswer(sessionId: string, answers: Record<s
     if (session) {
       questions = session.questions as { id: string; question: string; category: string }[];
     }
-  } catch (e) {
+  } catch (_e) {
     // Ignore
   }
 

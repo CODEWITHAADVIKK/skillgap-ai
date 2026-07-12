@@ -16,8 +16,6 @@ const isClerkConfigured = !!(
 );
 
 // Redirect destinations — honor the env vars Clerk would use in production
-const AFTER_SIGN_IN_URL =
-  process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL || "/dashboard";
 const AFTER_SIGN_UP_URL =
   process.env.NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL || "/onboarding";
 
@@ -25,7 +23,6 @@ const AFTER_SIGN_UP_URL =
 
 export function useUser() {
   if (isClerkConfigured) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     return realUseUser();
   }
 
@@ -158,7 +155,7 @@ function ErrorIcon() {
 
 // ─── SignIn ─────────────────────────────────────────────────────────────────────
 
-export function SignIn(props: any) {
+export function SignIn(_props: Record<string, unknown>) {
   const router = useRouter();
   const { signIn, isAuthenticated, isHydrated, hydrate } = useAuthStore();
   const [email, setEmail] = useState("");
@@ -180,7 +177,7 @@ export function SignIn(props: any) {
   }, [isHydrated, isAuthenticated, router]);
 
   if (isClerkConfigured) {
-    return <RealSignIn {...props} />;
+    return <RealSignIn {..._props} />;
   }
 
   // Show spinner while hydrating to prevent flash
@@ -299,7 +296,7 @@ export function SignIn(props: any) {
 
 // ─── SignUp ─────────────────────────────────────────────────────────────────────
 
-export function SignUp(props: any) {
+export function SignUp(_props: Record<string, unknown>) {
   const router = useRouter();
   const { signUp, isAuthenticated, isHydrated, hydrate } = useAuthStore();
   const [firstName, setFirstName] = useState("");
@@ -322,7 +319,7 @@ export function SignUp(props: any) {
   }, [isHydrated, isAuthenticated, router]);
 
   if (isClerkConfigured) {
-    return <RealSignUp {...props} />;
+    return <RealSignUp {..._props} />;
   }
 
   // Show spinner while hydrating

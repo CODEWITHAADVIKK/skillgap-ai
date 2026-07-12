@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { DashboardHeader } from "@/components/dashboard/header";
 import { getDashboardData } from "@/lib/data/dashboard";
 import { SkillTrendsCharts } from "./skill-trends-charts";

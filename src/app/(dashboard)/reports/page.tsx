@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getReportsData } from "@/lib/data/dashboard";
 import ReportsClient from "./reports-client";
 

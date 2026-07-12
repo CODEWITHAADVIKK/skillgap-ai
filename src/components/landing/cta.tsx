@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Cta() {
   return (
@@ -32,23 +33,26 @@ export function Cta() {
           </div>
           <div className="flex justify-center items-center gap-4 pt-8">
             <div className="flex -space-x-3">
-              <div className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-surface-container-high">
-                <img
-                  className="w-full h-full object-cover"
+              <div className="relative w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-surface-container-high">
+                <Image
+                  fill
+                  className="object-cover"
                   alt="Portrait of a professional young software developer, clean studio lighting, confident expression, minimalist office background, modern tech professional aesthetic."
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5ifCzU3UgXW-qhthG-6Cco4lYy8ErOaXzulJMUUpxMjpNfM3dneZjzsjQVHFICfN1tDGCelPo77eKhgSQ05d_0wYDTr05vS-3NTGBCtMMt-p55ah9C037BasHpJTmHyNua2hx8aCVzRwafsTn8qDvAhJh-XRfTiJIpW0JyNHMqFaPTrdMz41SFYAIry3AsVH0K9SDtWQH0to0uKJEe93rmqTNwiGWun4SCEDP09TlxJCrgBbRIGUP"
                 />
               </div>
-              <div className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-surface-container-high">
-                <img
-                  className="w-full h-full object-cover"
+              <div className="relative w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-surface-container-high">
+                <Image
+                  fill
+                  className="object-cover"
                   alt="Portrait of a diverse female data scientist smiling, soft natural lighting, high-end professional photography, minimalist aesthetic with cool tones."
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrCmGRZcteiFCL_zZ2rGoIup6yyyv19fMWtNBfcIO-fS7uXf1V4v5uEXh0KGldqmhJBApPIRnY2cH37hAhPYTdGs_CLvKJvQ-cB8Zf19GMqYqvt6uXsBKxQbMUIp3W2Pbk5GWCqbqUPvgiXWo5LW72zxJnChZKZKMOoAew80gS_8vL9Oi-tjYGmN6AWKH13OsjdJxpg68t0e0mw_0SzhajyQmhJY4BEaVTH5UffABzCf0D76Qe61DA"
                 />
               </div>
-              <div className="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-surface-container-high">
-                <img
-                  className="w-full h-full object-cover"
+              <div className="relative w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-surface-container-high">
+                <Image
+                  fill
+                  className="object-cover"
                   alt="Portrait of a tech lead in their late 20s, thoughtful expression, wearing glasses, soft professional bokeh background, clean premium look."
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF96yX-TugCabAPY52qd8sOFy6lQkZJSUxp8DFyY5sYYnz3H3K6SxcYrcFybxmwjnerrFW3dZ5ASi3swAG2cRmAz3XkzK9aB78twFyDIX2KrGe1_-EAHjicPHXu7N52UTyJeGkC6-wV9WoWmO25cSprQ75idNb882kaI0DTOZ0Qd3-cm7CUEyb-nU1oBJQ5EotjmcIC6IIZ4joHUMM_G-8YtcoSoW8ccs_e2D4NtIb-GVzhOU5r3Vy"
                 />

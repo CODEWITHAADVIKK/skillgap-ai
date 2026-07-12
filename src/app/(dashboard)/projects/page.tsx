@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getProjectsData } from "@/lib/data/dashboard";
 import ProjectsPageClient from "./projects-client";
 

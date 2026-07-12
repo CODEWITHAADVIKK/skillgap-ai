@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { getInterviewSessions } from "@/lib/data/dashboard";
 import InterviewPrepClient from "./interview-client";
 
