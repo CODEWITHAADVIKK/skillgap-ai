@@ -96,6 +96,17 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .soft-glow {
   filter: blur(80px);
   opacity: 0.4;
@@ -244,3 +255,34 @@ body {
 .gap-stack-md {
   gap: 16px;
 }
+
+/* User Profile Specific Styles */
+.glass-badge {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-shadow {
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(109, 93, 246, 0.03);
+}
+
+.fade-in-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.fade-in-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+.fade-in-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+.fade-in-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+.fade-in-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+.fade-in-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

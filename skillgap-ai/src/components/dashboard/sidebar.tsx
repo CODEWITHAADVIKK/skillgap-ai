@@ -103,7 +103,7 @@ export function Sidebar() {
       {user && (
         <div className="mt-4 pt-4 border-t border-outline-variant/20">
           <Link
-            href="/settings"
+            href="/profile"
             className="flex items-center gap-3 rounded-xl p-3 hover:bg-surface-container-high transition-colors group"
           >
             <div className="relative size-9 shrink-0">
