@@ -156,7 +156,10 @@ function ProjectCard({ project }: { project: Project }) {
         {/* Action buttons */}
         <div className="flex gap-3">
           {project.id.startsWith("demo-") ? (
-            <Button className="flex-1 rounded-full">
+            <Button 
+              className="flex-1 rounded-full"
+              onClick={() => alert("This is a demo project. Add your database connection to create and track real projects!")}
+            >
               <span className="material-symbols-outlined text-[18px]">bolt</span>
               Start Project
             </Button>
