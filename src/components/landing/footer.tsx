@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-surface dark:bg-surface-dim border-t border-outline-variant/10 w-full py-stack-lg relative overflow-hidden">
-      <div className="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+    <footer className="bg-surface dark:bg-surface-dim border-t border-outline-variant/10 w-full py-12 relative overflow-hidden">
+      <div className="w-full max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
         <div className="space-y-4 text-center md:text-left">
           <div className="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
             SkillGap AI

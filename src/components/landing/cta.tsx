@@ -3,15 +3,14 @@ import Image from "next/image";
 
 export function Cta() {
   return (
-    <section className="py-stack-xl max-w-container-max mx-auto px-gutter">
+    <section className="py-12 md:py-20 w-full max-w-7xl mx-auto px-6">
       <div className="bg-surface-container-lowest border border-outline-variant/10 rounded-[48px] p-12 lg:p-24 relative overflow-hidden text-center group">
         <div className="absolute top-0 left-0 w-full h-full bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
         <div className="absolute -top-48 -left-48 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div className="absolute -bottom-48 -right-48 w-96 h-96 bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div className="relative z-10 max-w-2xl mx-auto space-y-8">
-          <h2 className="font-display-xl text-display-xl tracking-tight">
-            Ready to close your{" "}
-            <span className="text-primary italic">skill gap?</span>
+          <h2 className="font-display-xl text-display-xl tracking-tight text-balance">
+            Ready to close your <span className="text-primary italic">skill gap?</span>
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant">
             Join thousands of students and professionals who are making

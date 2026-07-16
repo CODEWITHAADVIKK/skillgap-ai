@@ -1,17 +1,16 @@
 import Link from "next/link";
+import { Sparkles, BarChart3, PlayCircle, Radar } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative px-gutter pt-stack-xl pb-stack-xl max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="relative w-full max-w-7xl mx-auto px-6 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div className="z-10 space-y-stack-lg">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-fixed rounded-full text-on-primary-fixed text-label-sm font-label-sm">
-          <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
+          <Sparkles className="size-4 text-primary animate-pulse" />
           AI-Powered Career Intelligence
         </div>
-        <h1 className="font-display-xl text-display-xl leading-tight">
-          Close the <span className="italic text-primary">skill gap.</span>
-          <br />
-          Get <span className="text-tertiary">hired faster.</span>
+        <h1 className="font-display-xl text-display-xl leading-tight text-balance">
+          Close the <span className="italic text-primary">skill gap.</span> Get <span className="text-tertiary">hired faster.</span>
         </h1>
         <p className="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
           SkillGap AI analyzes your resume and GitHub, compares real-time job
@@ -23,14 +22,14 @@ export function Hero() {
             className="px-8 py-4 bg-primary text-white rounded-full font-label-md text-label-md flex items-center justify-center gap-3 hover:shadow-xl hover:-translate-y-1 transition-all"
             href="/onboarding"
           >
-            <span className="material-symbols-outlined">analytics</span>
+            <BarChart3 className="size-5" />
             Analyze my profile
           </Link>
           <Link
             className="px-8 py-4 bg-white/50 backdrop-blur border border-outline-variant/30 rounded-full font-label-md text-label-md flex items-center justify-center gap-3 hover:bg-white transition-all"
             href="/demo"
           >
-            <span className="material-symbols-outlined">play_circle</span>
+            <PlayCircle className="size-5 text-on-surface" />
             See how it works
           </Link>
         </div>
@@ -68,14 +67,14 @@ export function Hero() {
                       <span className="w-1.5 h-1.5 bg-error rounded-full"></span>
                       Docker
                     </span>
-                    <span className="text-error">Critical</span>
+                    <span className="text-error font-semibold">Critical</span>
                   </li>
                   <li className="flex justify-between text-label-sm">
                     <span className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 bg-tertiary rounded-full"></span>
                       Redis
                     </span>
-                    <span className="text-tertiary">Medium</span>
+                    <span className="text-tertiary font-semibold">Medium</span>
                   </li>
                 </ul>
               </div>
@@ -83,27 +82,25 @@ export function Hero() {
                 <p className="text-label-sm text-primary font-bold">
                   Suggested Project
                 </p>
-                <p className="text-body-md font-bold mt-1 leading-tight">
+                <p className="text-body-md font-bold mt-1 leading-tight text-on-surface">
                   Scalable Real-time Chat with Redis
                 </p>
               </div>
             </div>
             <div className="relative flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full border-8 border-primary/10 flex items-center justify-center relative">
+              <div className="w-32 h-32 rounded-full border-8 border-primary/10 flex items-center justify-center relative bg-surface-container-lowest">
                 <div className="absolute inset-0 border-t-8 border-primary rounded-full animate-spin [animation-duration:3s]"></div>
-                <span className="material-symbols-outlined text-primary text-4xl">
-                  radar
-                </span>
+                <Radar className="size-10 text-primary animate-pulse" />
               </div>
             </div>
           </div>
         </div>
         <div className="absolute -top-6 -right-6 w-32 h-32 glass-card rounded-2xl p-4 shadow-lg animate-bounce [animation-duration:5s] z-20 hidden md:block">
           <div className="flex flex-col items-center gap-2">
-            <div className="w-12 h-1 w-full bg-primary-container/30 rounded-full overflow-hidden">
+            <div className="h-1 w-full bg-primary-container/30 rounded-full overflow-hidden">
               <div className="w-2/3 h-full bg-primary"></div>
             </div>
-            <p className="text-[10px] font-bold text-center">
+            <p className="text-[10px] font-bold text-center text-on-surface">
               Resume Score Improved +15%
             </p>
           </div>

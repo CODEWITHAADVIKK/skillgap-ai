@@ -1,5 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard — SkillGap AI",
+  description: "Your personalized career intelligence dashboard.",
+};
+
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
@@ -50,7 +57,7 @@ export default async function DashboardPage() {
         </div>
 
         <h1 className="font-headline-lg text-headline-lg font-bold text-on-surface mb-2">
-          {greeting}, {firstName}.
+          {`${greeting}, ${firstName}.`}
         </h1>
         <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl mb-6">
           {data.heroMessage ??
@@ -111,7 +118,7 @@ export default async function DashboardPage() {
         <div className="lg:col-span-8 flex flex-col gap-6">
 
           {/* ATS Score Card */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-[28px] bg-white p-6 shadow-sm border border-outline-variant/10">
               <div className="flex items-center justify-between mb-3">
                 <div className="size-10 rounded-xl bg-surface-container-high flex items-center justify-center">

@@ -2,17 +2,24 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import {
-  ClerkProvider as RealClerkProvider,
-  SignOutButton as RealSignOutButton,
-  useUser as realUseUser,
-} from "@clerk/nextjs";
+import dynamic from "next/dynamic";
 import { useAuthStore } from "@/lib/auth-store";
 
 const isClerkConfigured = !!(
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY !== "pk_test_dGVzdC1jbGVyay1wdWJsaXNoYWJsZS1rZXk=" &&
   process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY !== "pk_test_ZG9tYWluLW5hbWUuY2xlcmsuYWNjb3VudHMuZGV2JA"
+);
+
+// Lazy load Clerk components only if configured
+const RealClerkProvider = dynamic(
+  () => import("@clerk/nextjs").then((mod) => mod.ClerkProvider),
+  { ssr: true }
+);
+
+const RealSignOutButton = dynamic(
+  () => import("@clerk/nextjs").then((mod) => mod.SignOutButton),
+  { ssr: true }
 );
 
 // Redirect destinations — honor the env vars Clerk would use in production
@@ -23,6 +30,8 @@ const AFTER_SIGN_UP_URL =
 
 export function useUser() {
   if (isClerkConfigured) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { useUser: realUseUser } = require("@clerk/nextjs");
     return realUseUser();
   }
 
@@ -109,10 +118,15 @@ export function ClerkProvider({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-import {
-  SignIn as RealSignIn,
-  SignUp as RealSignUp,
-} from "@clerk/nextjs";
+const RealSignIn = dynamic(
+  () => import("@clerk/nextjs").then((mod) => mod.SignIn),
+  { ssr: true }
+);
+
+const RealSignUp = dynamic(
+  () => import("@clerk/nextjs").then((mod) => mod.SignUp),
+  { ssr: true }
+);
 
 // ─── Shared inline SVG icons (no extra deps) ───────────────────────────────────
 
@@ -158,6 +172,7 @@ function ErrorIcon() {
 export function SignIn(_props: Record<string, unknown>) {
   const router = useRouter();
   const { signIn, isAuthenticated, isHydrated, hydrate } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -166,22 +181,24 @@ export function SignIn(_props: Record<string, unknown>) {
 
   // Hydrate session from localStorage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
     hydrate();
   }, [hydrate]);
 
   // Auto-redirect if already authenticated
   useEffect(() => {
-    if (isHydrated && isAuthenticated) {
+    if (mounted && isHydrated && isAuthenticated) {
       router.replace("/dashboard");
     }
-  }, [isHydrated, isAuthenticated, router]);
+  }, [mounted, isHydrated, isAuthenticated, router]);
 
   if (isClerkConfigured) {
     return <RealSignIn {..._props} />;
   }
 
   // Show spinner while hydrating to prevent flash
-  if (!isHydrated) {
+  if (!mounted || !isHydrated) {
     return (
       <div className="w-full bg-white rounded-3xl p-8 border border-outline-variant/20 shadow-xl flex items-center justify-center min-h-[280px]">
         <SpinnerIcon />
@@ -299,6 +316,7 @@ export function SignIn(_props: Record<string, unknown>) {
 export function SignUp(_props: Record<string, unknown>) {
   const router = useRouter();
   const { signUp, isAuthenticated, isHydrated, hydrate } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -308,22 +326,24 @@ export function SignUp(_props: Record<string, unknown>) {
 
   // Hydrate session from localStorage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
     hydrate();
   }, [hydrate]);
 
   // Auto-redirect if already authenticated
   useEffect(() => {
-    if (isHydrated && isAuthenticated) {
+    if (mounted && isHydrated && isAuthenticated) {
       router.replace("/dashboard");
     }
-  }, [isHydrated, isAuthenticated, router]);
+  }, [mounted, isHydrated, isAuthenticated, router]);
 
   if (isClerkConfigured) {
     return <RealSignUp {..._props} />;
   }
 
   // Show spinner while hydrating
-  if (!isHydrated) {
+  if (!mounted || !isHydrated) {
     return (
       <div className="w-full bg-white rounded-3xl p-8 border border-outline-variant/20 shadow-xl flex items-center justify-center min-h-[340px]">
         <SpinnerIcon />

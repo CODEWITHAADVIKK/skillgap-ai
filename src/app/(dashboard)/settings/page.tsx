@@ -1,5 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Settings — SkillGap AI",
+  description: "Configure your notifications, integrations, and preferences.",
+};
+
 import { getOrCreateUser } from "@/lib/auth";
 import { DashboardHeader } from "@/components/dashboard/header";
 
@@ -32,9 +39,13 @@ export default async function SettingsPage() {
           <h4 className="font-bold text-body-md mb-4">Notifications</h4>
           <div className="space-y-3">
             {["Email notifications", "Weekly digest", "Job match alerts", "Roadmap reminders"].map((item) => (
-              <label key={item} className="flex items-center justify-between">
-                <span className="font-body-md text-body-md">{item}</span>
-                <input type="checkbox" defaultChecked className="size-4 accent-primary" />
+              <label key={item} className="flex items-center justify-between cursor-pointer py-1">
+                <span className="font-body-md text-body-md select-none">{item}</span>
+                <div className="relative">
+                  <input type="checkbox" defaultChecked className="sr-only peer" />
+                  <div className="w-10 h-6 bg-surface-container-highest rounded-full peer peer-checked:bg-primary transition-colors duration-200" />
+                  <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 peer-checked:translate-x-4" />
+                </div>
               </label>
             ))}
           </div>

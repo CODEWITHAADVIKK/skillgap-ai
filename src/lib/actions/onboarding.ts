@@ -54,7 +54,7 @@ export async function uploadResume(formData: FormData) {
   let rawText = "";
   try {
     rawText = await extractTextFromFile(buffer, file.type);
-  } catch (_e) {
+  } catch {
     rawText = file.name;
   }
   const fileUrl = `/uploads/${user.id}/${file.name}`;
@@ -78,7 +78,7 @@ export async function uploadResume(formData: FormData) {
       where: { userId: user.id },
       data: { onboardingStep: 4 },
     });
-  } catch (_error) {
+  } catch {
     // Ignore
   }
 
@@ -101,7 +101,7 @@ export async function connectGitHub(username: string) {
       where: { userId: user.id },
       data: { onboardingStep: 5 },
     });
-  } catch (_error) {
+  } catch {
     // Ignore
   }
 
@@ -361,7 +361,7 @@ export async function submitInterviewAnswer(sessionId: string, answers: Record<s
     if (session) {
       questions = session.questions as { id: string; question: string; category: string }[];
     }
-  } catch (_e) {
+  } catch {
     // Ignore
   }
 

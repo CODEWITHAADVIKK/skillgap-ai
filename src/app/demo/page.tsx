@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/landing/header";
+import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+  title: "Demo — SkillGap AI",
+  description:
+    "See SkillGap AI in action. Watch how we analyze a developer profile and generate a personalized career roadmap in under 2 minutes.",
+  openGraph: {
+    title: "Demo — SkillGap AI",
+    description: "See SkillGap AI in action — analyze a developer profile in under 2 minutes.",
+  },
+};
 
 const DEMO_FEATURES = [
   {
@@ -7,7 +19,8 @@ const DEMO_FEATURES = [
     description:
       "Upload your resume and connect GitHub. Our AI extracts every skill, project, and achievement — then cross-references with live job market data.",
     icon: "analytics",
-    accent: "bg-primary",
+    bgClass: "bg-primary/10",
+    textClass: "text-primary",
     stats: "48 skills detected in 30 seconds",
   },
   {
@@ -15,7 +28,8 @@ const DEMO_FEATURES = [
     description:
       "We compare your profile against hundreds of live job postings for your dream role and show you exactly what's missing — ranked by market impact.",
     icon: "radar",
-    accent: "bg-tertiary",
+    bgClass: "bg-tertiary/10",
+    textClass: "text-tertiary",
     stats: "89% accuracy vs manual review",
   },
   {
@@ -23,7 +37,8 @@ const DEMO_FEATURES = [
     description:
       "Get a personalized 12-week roadmap with milestones, project ideas, and learning resources — all tailored to your experience level and goals.",
     icon: "route",
-    accent: "bg-primary",
+    bgClass: "bg-primary/10",
+    textClass: "text-primary",
     stats: "3x faster career progression",
   },
   {
@@ -31,7 +46,8 @@ const DEMO_FEATURES = [
     description:
       "Chat with an AI that knows your profile. Get instant answers on resume improvements, interview prep, salary negotiation, and learning paths.",
     icon: "smart_toy",
-    accent: "bg-tertiary",
+    bgClass: "bg-tertiary/10",
+    textClass: "text-tertiary",
     stats: "Available 24/7 with full context",
   },
   {
@@ -39,7 +55,8 @@ const DEMO_FEATURES = [
     description:
       "Practice real interview questions for your target role with AI evaluation, detailed feedback, and scoring — from technical to behavioral rounds.",
     icon: "mic",
-    accent: "bg-primary",
+    bgClass: "bg-primary/10",
+    textClass: "text-primary",
     stats: "94% user confidence improvement",
   },
   {
@@ -47,7 +64,8 @@ const DEMO_FEATURES = [
     description:
       "Manage every job application in one kanban board. Track status from applied to offer, set reminders, and see your pipeline at a glance.",
     icon: "checklist",
-    accent: "bg-tertiary",
+    bgClass: "bg-tertiary/10",
+    textClass: "text-tertiary",
     stats: "Never miss a follow-up again",
   },
 ];
@@ -187,8 +205,8 @@ export default function DemoPage() {
               key={feature.title}
               className="rounded-[24px] bg-white p-6 shadow-sm border border-outline-variant/10 hover:shadow-md transition-shadow"
             >
-              <div className={`size-12 rounded-2xl ${feature.accent}/10 flex items-center justify-center mb-4`}>
-                <span className={`material-symbols-outlined text-[24px] ${feature.accent === "bg-primary" ? "text-primary" : "text-tertiary"}`}>
+              <div className={`size-12 rounded-2xl ${feature.bgClass} flex items-center justify-center mb-4`}>
+                <span className={`material-symbols-outlined text-[24px] ${feature.textClass}`}>
                   {feature.icon}
                 </span>
               </div>
@@ -234,6 +252,7 @@ export default function DemoPage() {
           </p>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

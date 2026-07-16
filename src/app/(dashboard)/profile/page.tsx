@@ -1,5 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Profile — SkillGap AI",
+  description: "View and edit your SkillGap AI profile settings.",
+};
+
 import { redirect } from "next/navigation";
 import { getOrCreateUser } from "@/lib/auth";
 import { ProfileClient } from "./profile-client";

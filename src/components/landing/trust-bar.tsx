@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export function TrustBar() {
   return (
-    <section className="py-stack-lg border-y border-outline-variant/5 bg-surface-container-lowest/50">
-      <div className="max-w-container-max mx-auto px-gutter text-center">
+    <section className="py-8 border-y border-outline-variant/5 bg-surface-container-lowest/50">
+      <div className="w-full max-w-7xl mx-auto px-6 text-center">
         <p className="font-label-sm text-label-sm text-on-surface-variant/50 uppercase tracking-[0.2em] mb-stack-md">
           Trusted by 10,000+ CS students from top universities
         </p>

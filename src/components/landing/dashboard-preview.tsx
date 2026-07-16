@@ -1,11 +1,21 @@
+import {
+  LayoutDashboard,
+  LineChart,
+  FolderKanban,
+  RefreshCw,
+  Database,
+  FileText,
+  FileCheck,
+} from "lucide-react";
+
 export function DashboardPreview() {
   return (
-    <section className="py-stack-xl px-gutter max-w-container-max mx-auto">
+    <section className="py-12 md:py-20 w-full max-w-7xl mx-auto px-6">
       <div className="mb-stack-lg space-y-4">
         <span className="px-4 py-1.5 bg-surface-container-high rounded-full text-on-surface-variant text-label-sm font-label-sm">
           Dashboard Ecosystem
         </span>
-        <h2 className="font-headline-lg text-headline-lg">
+        <h2 className="font-headline-lg text-headline-lg text-on-surface">
           Your career command center.
         </h2>
         <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
@@ -29,21 +39,15 @@ export function DashboardPreview() {
             <div className="lg:w-48 space-y-6">
               <div className="space-y-3">
                 <div className="h-10 bg-primary/10 rounded-xl flex items-center px-4 gap-3 text-primary">
-                  <span className="material-symbols-outlined text-[20px]">
-                    dashboard
-                  </span>
-                  <span className="font-label-sm">Overview</span>
+                  <LayoutDashboard className="size-5 shrink-0" />
+                  <span className="font-label-sm font-semibold">Overview</span>
                 </div>
-                <div className="h-10 hover:bg-surface-container-high rounded-xl flex items-center px-4 gap-3 text-on-surface-variant transition-colors">
-                  <span className="material-symbols-outlined text-[20px]">
-                    analytics
-                  </span>
+                <div className="h-10 hover:bg-surface-container-high rounded-xl flex items-center px-4 gap-3 text-on-surface-variant transition-colors cursor-pointer">
+                  <LineChart className="size-5 shrink-0" />
                   <span className="font-label-sm">Analysis</span>
                 </div>
-                <div className="h-10 hover:bg-surface-container-high rounded-xl flex items-center px-4 gap-3 text-on-surface-variant transition-colors">
-                  <span className="material-symbols-outlined text-[20px]">
-                    assignment
-                  </span>
+                <div className="h-10 hover:bg-surface-container-high rounded-xl flex items-center px-4 gap-3 text-on-surface-variant transition-colors cursor-pointer">
+                  <FolderKanban className="size-5 shrink-0" />
                   <span className="font-label-sm">Projects</span>
                 </div>
               </div>
@@ -59,47 +63,53 @@ export function DashboardPreview() {
                 </div>
               </div>
             </div>
-            <div className="flex-grow space-y-8">
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="p-4 bg-surface-container rounded-2xl">
-                  <p className="text-[10px] text-on-surface-variant uppercase font-bold">
-                    Skills
+            <div className="flex-1 bg-surface-container-low/30 rounded-2xl border border-outline-variant/10 p-6 flex flex-col justify-between relative overflow-hidden min-h-[300px]">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h4 className="font-bold text-body-md text-on-surface">Career Match Score</h4>
+                  <p className="text-[12px] text-on-surface-variant mt-1">
+                    Based on your profile vs. Mid-level Full Stack role
                   </p>
-                  <p className="text-headline-md font-bold">48</p>
                 </div>
-                <div className="p-4 bg-surface-container rounded-2xl">
-                  <p className="text-[10px] text-on-surface-variant uppercase font-bold">
-                    Gaps
-                  </p>
-                  <p className="text-headline-md font-bold text-error">12</p>
-                </div>
-                <div className="p-4 bg-surface-container rounded-2xl">
-                  <p className="text-[10px] text-on-surface-variant uppercase font-bold">
-                    Projects
-                  </p>
-                  <p className="text-headline-md font-bold text-primary">3</p>
-                </div>
-                <div className="p-4 bg-surface-container rounded-2xl">
-                  <p className="text-[10px] text-on-surface-variant uppercase font-bold">
-                    Rank
-                  </p>
-                  <p className="text-headline-md font-bold text-tertiary">
-                    Top 8%
-                  </p>
+                <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-label-sm font-bold">
+                  84% Match
+                </span>
+              </div>
+              <div className="flex-1 flex items-center justify-center relative py-6">
+                {/* SVG Radial Graph Mockup */}
+                <div className="relative size-36 flex items-center justify-center">
+                  <svg className="size-full -rotate-90" viewBox="0 0 36 36">
+                    <path
+                      className="text-surface-container-high"
+                      strokeWidth="3.5"
+                      stroke="currentColor"
+                      fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                    <path
+                      className="text-primary"
+                      strokeDasharray="84, 100"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      stroke="currentColor"
+                      fill="none"
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                    />
+                  </svg>
+                  <div className="absolute flex flex-col items-center justify-center">
+                    <span className="text-headline-md font-bold text-on-surface">84</span>
+                    <span className="text-[10px] text-on-surface-variant uppercase font-semibold">Ready</span>
+                  </div>
                 </div>
               </div>
-              <div className="p-6 bg-white rounded-[24px] border border-outline-variant/10 shadow-sm">
-                <div className="flex justify-between items-center mb-6">
-                  <h4 className="font-bold text-body-md">Skill Radar Analysis</h4>
-                  <button className="text-primary text-label-sm">Details</button>
+              <div className="flex gap-4 border-t border-outline-variant/10 pt-4 mt-4">
+                <div className="flex-1 text-center border-r border-outline-variant/10">
+                  <p className="text-[10px] text-on-surface-variant uppercase font-semibold">Critical Gaps</p>
+                  <p className="font-bold text-primary text-label-md mt-1">2 Gaps</p>
                 </div>
-                <div className="h-48 flex items-end justify-between gap-2 px-4">
-                  <div className="w-full bg-primary/10 rounded-t-lg h-[40%] transition-all group-hover:h-[60%]"></div>
-                  <div className="w-full bg-primary/20 rounded-t-lg h-[70%] transition-all group-hover:h-[85%]"></div>
-                  <div className="w-full bg-primary rounded-t-lg h-[55%] transition-all group-hover:h-[70%]"></div>
-                  <div className="w-full bg-primary/40 rounded-t-lg h-[90%] transition-all group-hover:h-[95%]"></div>
-                  <div className="w-full bg-primary/20 rounded-t-lg h-[45%] transition-all group-hover:h-[55%]"></div>
-                  <div className="w-full bg-primary/60 rounded-t-lg h-[30%] transition-all group-hover:h-[40%]"></div>
+                <div className="flex-1 text-center">
+                  <p className="text-[10px] text-on-surface-variant uppercase font-semibold">Hiring Level</p>
+                  <p className="font-bold text-tertiary text-label-md mt-1">L4 / Mid</p>
                 </div>
               </div>
             </div>
@@ -108,32 +118,28 @@ export function DashboardPreview() {
         <div className="md:col-span-4 flex flex-col gap-6">
           <div className="flex-grow glass-card rounded-[32px] p-8 space-y-6 relative overflow-hidden group">
             <div className="w-12 h-12 bg-tertiary/10 rounded-2xl flex items-center justify-center text-tertiary">
-              <span className="material-symbols-outlined">sync</span>
+              <RefreshCw className="size-6" />
             </div>
-            <h3 className="text-headline-md font-bold">Live Sync</h3>
+            <h3 className="text-headline-md font-bold text-on-surface">Live Sync</h3>
             <p className="text-on-surface-variant">
               We monitor thousands of job postings daily to ensure your career
               roadmap is always based on the latest industry demands.
             </p>
             <div className="absolute -right-10 -bottom-10 opacity-5 group-hover:scale-110 transition-transform">
-              <span className="material-symbols-outlined text-[160px]">
-                database
-              </span>
+              <Database className="size-36 text-on-surface" />
             </div>
           </div>
           <div className="flex-grow glass-card rounded-[32px] p-8 space-y-6 relative overflow-hidden group bg-primary-fixed/30">
             <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-              <span className="material-symbols-outlined">history_edu</span>
+              <FileText className="size-6" />
             </div>
-            <h3 className="text-headline-md font-bold">Smart Resume</h3>
+            <h3 className="text-headline-md font-bold text-on-surface">Smart Resume</h3>
             <p className="text-on-surface-variant">
               Our AI rewrite suggestions optimize your bullet points for
               applicant tracking systems (ATS) and human eyes alike.
             </p>
             <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:rotate-12 transition-transform">
-              <span className="material-symbols-outlined text-[140px]">
-                description
-              </span>
+              <FileCheck className="size-32 text-primary" />
             </div>
           </div>
         </div>

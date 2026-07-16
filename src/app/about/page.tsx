@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/landing/header";
+import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+  title: "About — SkillGap AI",
+  description:
+    "Learn how SkillGap AI is closing the gap between talent and opportunity with AI-powered career intelligence for engineers.",
+  openGraph: {
+    title: "About — SkillGap AI",
+    description: "Learn how SkillGap AI is closing the gap between talent and opportunity.",
+  },
+};
 
 const TEAM = [
   { name: "Arjun Sharma", role: "CEO & Co-founder", bio: "Ex-Google, Stanford CS. Built hiring infrastructure that screened 1M+ candidates." },
@@ -113,6 +125,7 @@ export default function AboutPage() {
           </Link>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

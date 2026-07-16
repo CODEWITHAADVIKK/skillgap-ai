@@ -1,6 +1,18 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/landing/header";
+import { Footer } from "@/components/landing/footer";
 import { Check } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Pricing — SkillGap AI",
+  description:
+    "Simple, transparent pricing for SkillGap AI. Start free, upgrade when you need more. Cancel anytime.",
+  openGraph: {
+    title: "Pricing — SkillGap AI",
+    description: "Simple, transparent pricing. Start free, upgrade when you need more.",
+  },
+};
 
 const PLANS = [
   {
@@ -149,6 +161,7 @@ export default function PricingPage() {
           </p>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

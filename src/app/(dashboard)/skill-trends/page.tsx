@@ -1,5 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Skill Trends — SkillGap AI",
+  description: "Explore live job market demand trends and salary data for your target role.",
+};
+
 import { DashboardHeader } from "@/components/dashboard/header";
 import { getDashboardData } from "@/lib/data/dashboard";
 import { SkillTrendsCharts } from "./skill-trends-charts";
@@ -15,7 +22,7 @@ export default async function SkillTrendsPage() {
       />
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {[
           { label: "Median Salary", value: "$142,000", sub: `for ${data.profile.dreamRole}` },
           { label: "Salary Range", value: "$90K — $200K", sub: "Market wide" },

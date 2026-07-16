@@ -1,5 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Learning Roadmap — SkillGap AI",
+  description: "Track your personalized learning roadmap designed by AI to close your skill gaps.",
+};
+
 import Link from "next/link";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { getRoadmapData } from "@/lib/data/dashboard";

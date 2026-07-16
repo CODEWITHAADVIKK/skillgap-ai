@@ -21,7 +21,7 @@ try {
       }
     }
   }
-} catch (e) {
+} catch {
   // Ignore
 }
 

@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/landing/header";
+import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+  title: "Resources — SkillGap AI",
+  description:
+    "Free career guides, interview prep templates, cheatsheets, and market intelligence for engineers.",
+  openGraph: {
+    title: "Resources — SkillGap AI",
+    description: "Free career guides, interview prep, and market intelligence for engineers.",
+  },
+};
 
 const RESOURCES = [
   {
@@ -149,6 +161,7 @@ export default function ResourcesPage() {
           <p className="mt-3 text-[11px] text-on-surface-variant/60">No spam. Unsubscribe anytime.</p>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

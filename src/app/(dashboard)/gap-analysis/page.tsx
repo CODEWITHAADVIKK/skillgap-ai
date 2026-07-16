@@ -1,5 +1,12 @@
 export const dynamic = 'force-dynamic';
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gap Analysis — SkillGap AI",
+  description: "Identify and analyze the gaps between your current skill profile and market expectations.",
+};
+
 import Link from "next/link";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { getGapAnalysisData } from "@/lib/data/dashboard";
@@ -186,7 +193,7 @@ export default async function GapAnalysisPage() {
                     {gap.whyItMatters}
                   </p>
 
-                  <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                     <div>
                       <p className="text-[10px] text-on-surface-variant uppercase font-bold mb-1">Confidence</p>
                       <div className="flex items-center gap-2">
